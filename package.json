@@ -2,9 +2,10 @@
   "name": "calc-angular",
   "version": "0.0.0",
   "license": "MIT",
+  "main": "server.js",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -55,7 +56,7 @@
     "typescript": "~2.3.3"
   },
   "engines": {
-    "node": "10.15.1",
-    "npm": "6.4.1"
+    "node": "~10.15.1",
+    "npm": "~6.4.1"
   }
 }
