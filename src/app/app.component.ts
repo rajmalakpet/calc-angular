@@ -11,7 +11,7 @@ export class AppComponent {
 
   displayInfo: string = "Ans.";
   globalError: string = "";
-  displayResult: any = 0;
+  displayResult: string = '0';
   operationsArray: any = ['+','-','x','/','.','*'];
   production: boolean = environment.production;
 
@@ -20,17 +20,17 @@ export class AppComponent {
     this.globalError = "";
   }
 
-  handleNumeric(_number: any){
+  handleNumeric(_number: string){
     console.log('user entered number: ', _number);
 
     this.clearError();
-    if (this.displayResult.toString().length > 25) {
+    if (this.displayResult.length > 25) {
       this.globalError = 'Too Many numbers!';
-      this.displayResult = 0;
+      this.displayResult = '0';
       return;
     }
 
-    if (this.displayResult === 0) {
+    if (this.displayResult === '0') {
       this.displayResult = _number;
     } else {
       this.displayResult += _number;
@@ -38,32 +38,32 @@ export class AppComponent {
 
   }
 
-  handleOperation(_operator: any){
+  handleOperation(_operator: string){
     console.log('<=== user entered operator: ', _operator);
 
     this.clearError();
-    if (this.displayResult.toString().length > 25) {
+    if (this.displayResult.length > 25) {
       this.globalError = 'Too Many numbers!';
-      this.displayResult = 0;
+      this.displayResult = '0';
       return;
     }
 
     switch(_operator) {
-      case '+' :  this.displayResult === 0 ? this.displayResult = _operator : (this.checkConsecutiveOperators(this.displayResult.toString().slice(-1)) ? this.displayResult : this.displayResult += _operator);
+      case '+' :  this.displayResult === '0' ? this.displayResult = _operator : (this.checkConsecutiveOperators(this.displayResult.slice(-1)) ? this.displayResult : this.displayResult += _operator);
                   break;
-      case '-' :  this.displayResult === 0 ? this.displayResult = _operator : (this.checkConsecutiveOperators(this.displayResult.toString().slice(-1)) ? this.displayResult : this.displayResult += _operator);
+      case '-' :  this.displayResult === '0' ? this.displayResult = _operator : (this.checkConsecutiveOperators(this.displayResult.slice(-1)) ? this.displayResult : this.displayResult += _operator);
                   break;
-      case 'x' :  this.displayResult === 0 ? this.displayResult : (this.checkConsecutiveOperators(this.displayResult.toString().slice(-1)) ? this.displayResult : this.displayResult += '*');
+      case 'x' :  this.displayResult === '0' ? this.displayResult += '*' : (this.checkConsecutiveOperators(this.displayResult.slice(-1)) ? this.displayResult : this.displayResult += '*');
                   break;
-      case '/' :  this.displayResult === 0 ? this.displayResult : (this.checkConsecutiveOperators(this.displayResult.toString().slice(-1)) ? this.displayResult : this.displayResult += _operator);
+      case '/' :  this.displayResult === '0' ? this.displayResult += _operator : (this.checkConsecutiveOperators(this.displayResult.slice(-1)) ? this.displayResult : this.displayResult += _operator);
                   break;
-      case '.' :  this.displayResult === 0 ? this.displayResult += _operator : (this.checkConsecutiveOperators(this.displayResult.toString().slice(-1)) ? this.displayResult : this.displayResult += _operator);     
+      case '.' :  this.displayResult === '0' ? this.displayResult += _operator : (this.checkConsecutiveOperators(this.displayResult.slice(-1)) ? this.displayResult : this.displayResult += _operator);     
                   break;
       case '=' :  try {
                     let _copy = this.displayResult;
                     let _total = eval(this.displayResult);
                     console.log('<=== check: _total after eval: '+_total+', typeof: '+typeof(_total));
-                    this.displayResult = parseFloat(_total);
+                    this.displayResult = parseFloat(_total).toString();
                     this.displayInfo = _copy+'=';
                   } catch (ex) {
                     console.log('<=== error processing computation: ', ex);
@@ -82,22 +82,22 @@ export class AppComponent {
   resetAC(){
     console.log('<=== user clicked AC');
     this.clearError();
-    this.displayResult = 0;
+    this.displayResult = '0';
     this.displayInfo = 'Ans.';
   }
 
   undoCE(){
     console.log('<=== user clicked CE');
     this.clearError();
-    if (this.displayResult.toString().length === 1) {
-      this.displayResult = 0;
-    } else if (this.displayResult.toString() === 'Infinity') {
-      this.displayResult = 0;
-      this.displayInfo = 'Infinity';
-    } else if (this.displayResult.toString().length > 1) {
-      this.displayResult = this.displayResult.toString().slice(0,-1);
+    if (this.displayResult.length === 1) {
+      this.displayResult = '0';
+    } else if (this.displayResult === 'Infinity' || this.displayResult === "NaN") {
+      this.displayResult = '0';
+      this.displayInfo = 'Ans.';
+    } else if (this.displayResult.length > 1) {
+      this.displayResult = this.displayResult.slice(0,-1);
     }
-    console.log('displayResult after slice: ', this.displayResult);
+    console.log('<=== displayResult after slice: ', this.displayResult);
   }
 
 }
