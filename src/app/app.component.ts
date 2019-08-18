@@ -13,7 +13,7 @@ export class AppComponent {
   globalError: string = "";
   displayResult: any = 0;
   operationsArray: any = ['+','-','x','/','.','*'];
-  env: any = environment;
+  production: boolean = environment.production;
 
   clearError(){
     console.log('<=== clear error triggered ===>');
