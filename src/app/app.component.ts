@@ -12,7 +12,7 @@ export class AppComponent {
   displayInfo: string = "Ans.";
   globalError: string = "";
   displayResult: string = '0';
-  operationsArray: any = ['+','-','x','/','.','*'];
+  operationsArray: Array<string> = ['+','-','x','/','.','*'];
   production: boolean = environment.production;
 
   clearError(){
