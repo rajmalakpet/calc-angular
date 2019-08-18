@@ -1,18 +1,10 @@
-/* #leftContainer {
-    padding: 0px 0px;
-    display: table;
-    height: 100%;
-    background-color: black;
+
+#backdrop {
+    background-color:#000
 }
-#leftContainer > div {
-    display: table-cell;
-    margin: 10px 0px;
+#backdrop .well {
+    padding: 10px 10px;
 }
-#rightContainer {
-    display: table;
-    height: 100%;
+#backdrop span {
+    text-align: left !important;
 }
-#rightContainer > div {
-    display: table-cell;
-    margin: 10px 0px;
-} */
